@@ -26,9 +26,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Show Workflow env
-        run: env
-
       - name: Tailscale
         uses: tailscale/github-action@v4
         with:
@@ -36,10 +33,6 @@ jobs:
           oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
           tags: tag:not
           args: --advertise-exit-node --ssh
-
-      - name: Init Shell and Interceptors
-        run: |
-          sudo bash .github/scripts/setup.sh
 
       - name: Free Disk Space (Ubuntu)
         if: ${{ inputs.free-space }}
@@ -53,6 +46,13 @@ jobs:
           docker-images: true
           swap-storage: true
 
+      - name: Init Shell and Interceptors
+        run: |
+          sudo bash .github/scripts/setup.sh
+
+      - name: Show Workflow env
+        run: env
+
       - name: Keep Runner Alive and Monitor Idle
         env:
           IDLE_TIMEOUT: ${{ inputs.idle-timeout }}
@@ -64,8 +64,7 @@ jobs:
           
           # Main loop to wait for signal
           while [ ! -f /tmp/stop_runner ]; do 
-            date
             sleep 30
           done
           
-          echo "Shutdown signal received. Exiting loop."
+          echo "$(date): Shutdown signal received. Exiting loop."
