@@ -29,8 +29,13 @@ jobs:
       - name: Show Workflow env
         run: env
 
-      - name: Setup Tailscale
-        run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up --auth-key=${{ secrets.TAILSCALE_AUTH_KEY }} --advertise-exit-node --ssh
+      - name: Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
+          tags: tag:not
+          args: --advertise-exit-node --ssh
 
       - name: Init Shell and Interceptors
         run: |
