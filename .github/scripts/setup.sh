@@ -24,6 +24,9 @@ ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
 # Copy .zshrc from scripts
 cp .github/scripts/.zshrc "$HOME/.zshrc"
 
+# Copy .tmux.conf from scripts
+cp .github/scripts/.tmux.conf "$HOME/.tmux.conf"
+
 # Fix zsh completion permissions
 chmod go-w /usr/share/zsh 2>/dev/null || true
 chmod go-w /usr/share/zsh/vendor-completions 2>/dev/null || true
