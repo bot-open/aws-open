@@ -35,12 +35,8 @@ while true; do
 
     if [ "$SESSION_WHO" = "yes" ] || [ "$SESSION_TS" = "yes" ] || [ "$SESSION_SS" = "yes" ]; then
         # Active sessions found
-        if [ $IDLE_TIME -ne 0 ] || [ $(( $(date +%s) % 120 )) -lt $CHECK_INTERVAL ]; then
-            echo "$(date): System active. Details:"
-            [ "$SESSION_WHO" = "yes" ] && echo "  - who: $SESSION_WHO_RAW"
-            [ "$SESSION_TS" = "yes" ] && echo "  - ts: $SESSION_TS_RAW"
-            [ "$SESSION_SS" = "yes" ] && echo "  - ss: $SESSION_SS_RAW"
-            echo "Resetting idle timer."
+        if [ $IDLE_TIME -ne 0 ]; then
+            echo "$(date): Activity detected. Resetting idle timer."
         fi
         IDLE_TIME=0
     else
