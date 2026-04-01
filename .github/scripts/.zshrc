@@ -10,5 +10,6 @@ autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 
 alias bat="batcat"
+alias cls="clear"
 command -v starship >/dev/null && eval "$(starship init zsh)"
 [ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
