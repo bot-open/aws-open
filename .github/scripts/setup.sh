@@ -55,4 +55,4 @@ for cmd in poweroff reboot shutdown halt; do
 done
 
 # Finish, Change Shell
-chsh root -s $(which zsh)
+chsh root -s "$(which zsh)"
