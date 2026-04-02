@@ -66,10 +66,8 @@ jobs:
           swap-storage: true
 
       - name: Init Shell and Interceptors
-        env:
-          IDLE_TIMEOUT: ${{ inputs.idle-timeout }}
         run: |
-          sudo -E bash .github/scripts/setup.sh
+          sudo IDLE_TIMEOUT=${{ inputs.idle-timeout }} bash .github/scripts/setup.sh
 
       - name: Keep Runner Alive
         run: |
