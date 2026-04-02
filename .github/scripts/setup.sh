@@ -56,3 +56,34 @@ done
 
 # Finish, Change Shell
 chsh root -s "$(which zsh)"
+
+# Setup Idle Watcher Service
+cp .github/scripts/idle-watcher.sh /usr/local/bin/idle-watcher
+chmod +x /usr/local/bin/idle-watcher
+
+# Create environment file for the service
+IDLE_TIMEOUT=${IDLE_TIMEOUT:-120}
+echo "IDLE_TIMEOUT=${IDLE_TIMEOUT}" > /etc/default/idle-watcher
+
+cat > /etc/systemd/system/idle-watcher.service << 'EOF'
+[Unit]
+Description=Idle Watcher Service
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/idle-watcher
+ExecStart=/usr/local/bin/idle-watcher
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+if [ "$IDLE_TIMEOUT" -gt 0 ]; then
+    systemctl enable idle-watcher
+    systemctl start idle-watcher
+else
+    echo "Idle timeout is 0. Service will not be started."
+fi

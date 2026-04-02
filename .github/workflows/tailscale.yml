@@ -58,17 +58,14 @@ jobs:
           swap-storage: true
 
       - name: Init Shell and Interceptors
-        run: |
-          sudo bash .github/scripts/setup.sh
-
-      - name: Keep Runner Alive and Monitor Idle
         env:
           IDLE_TIMEOUT: ${{ inputs.idle-timeout }}
         run: |
+          sudo -E bash .github/scripts/setup.sh
+
+      - name: Keep Runner Alive
+        run: |
           echo "Runner is active. Connect via Tailscale SSH and run 'poweroff' to terminate."
-          
-          # Run idle watcher in background
-          sudo IDLE_TIMEOUT=${{ inputs.idle-timeout }} bash .github/scripts/idle-watcher.sh &
           
           # Main loop to wait for signal
           while [ ! -f /tmp/stop_runner ]; do 
