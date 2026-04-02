@@ -28,11 +28,9 @@ jobs:
 
       - name: Set Custom Hostname
         run: |
-          sudo su - root << 'EOF'
           OWNER=$(echo "$GITHUB_REPOSITORY_OWNER" | tr '[:upper:]' '[:lower:]')
           HOSTNAME="runner-$OWNER"
-          hostnamectl set-hostname "$HOSTNAME"
-          EOF
+          sudo hostnamectl set-hostname "$HOSTNAME"
 
       - name: Enable TCP BBR Congestion Control
         run: |
