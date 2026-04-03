@@ -42,7 +42,7 @@ while true; do
         # fi
 
         # Trigger shutdown on timeout
-        if [ $IDLE_TIME -ge $TIMEOUT ]; then
+        if [ $IDLE_TIME -ge "$TIMEOUT" ]; then
             echo "$(date): Idle timeout reached. Triggering shutdown."
             /usr/local/bin/action-shutdown
             break
