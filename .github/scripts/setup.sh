@@ -34,8 +34,6 @@ chmod go-w /usr/share/zsh/vendor-completions 2>/dev/null || true
 # Setup Interceptors
 cat > /usr/local/bin/action-shutdown << 'EOF'
 #!/bin/bash
-pgrep -x login | xargs -r kill
-pgrep -x mosh-server | xargs -r kill
 pgrep -x tail | xargs -r kill
 EOF
 
