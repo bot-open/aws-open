@@ -20,6 +20,10 @@ tar xf lazygit.tar.gz lazygit
 rm lazygit.tar.gz
 install lazygit -D -t /usr/local/bin/
 
+# Install dependencies for nvim
+rustup default stable
+cargo install --locked tree-sitter-cli
+
 # Install Jetbrains Mono Font
 curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
 mkdir -p ~/.local/share/fonts/JetBrainsMono
