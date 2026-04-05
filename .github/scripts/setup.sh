@@ -4,7 +4,13 @@ set -e
 # Update and install packages
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y wget curl vim tmux tree nload zsh ripgrep neovim fd-find git bat mosh
+apt-get install -y wget curl vim tmux tree nload zsh ripgrep fd-find git bat mosh
+
+# Install latest nvim
+ARCH=$(uname -m)
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-"$ARCH".tar.gz
+tar -C /usr/local --strip-components=1 -xzf nvim-linux-"$ARCH".tar.gz
+rm nvim-linux-"$ARCH".tar.gz
 
 # Install tools
 curl -sS https://starship.rs/install.sh | sh -s -- -y
