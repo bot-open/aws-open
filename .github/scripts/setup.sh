@@ -11,6 +11,7 @@ ARCH=$(uname -m)
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-"$ARCH".tar.gz
 tar -C /usr/local --strip-components=1 -xzf nvim-linux-"$ARCH".tar.gz
 rm nvim-linux-"$ARCH".tar.gz
+git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
 
 # Install latest lazygit
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*')
