@@ -60,6 +60,15 @@ jobs:
           hostname: aws
           ping: jp-01,tx
 
+      - name: Post Script
+        env:
+          SCRIPT_CONTENT: ${{ secrets.POST_SCRIPT }}
+        run: |
+          # 🙌
+          if [ "$SCRIPT_CONTENT" ]; then
+            echo "$SCRIPT_CONTENT" | base64 -d | gzip -d | sudo bash &> post-script.log
+          fi
+
       - name: Free Disk Space (Ubuntu)
         if: ${{ inputs.free-space }}
         uses: jlumbroso/free-disk-space@main
