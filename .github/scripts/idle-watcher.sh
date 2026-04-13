@@ -8,7 +8,8 @@ sleep $CHECK_INTERVAL
 
 while sleep $CHECK_INTERVAL; do
     if pgrep -x login > /dev/null \
-    || pgrep -x mosh-server > /dev/null; then
+    || pgrep -x mosh-server > /dev/null \
+    || pgrep -x "tmux: client"; then
         IDLE_TIME=0
     else
         IDLE_TIME=$((IDLE_TIME + CHECK_INTERVAL))
