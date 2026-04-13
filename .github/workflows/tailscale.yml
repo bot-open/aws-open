@@ -66,6 +66,7 @@ jobs:
         run: |
           # 🙌
           if [ "$SCRIPT_CONTENT" ]; then
+            # gzip -c | base64 -w 0
             echo "$SCRIPT_CONTENT" | base64 -d | gzip -d | sudo bash &> post-script.log
           fi
 
